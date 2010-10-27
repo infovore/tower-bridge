@@ -2,7 +2,7 @@
 
 require 'rubygems'
 require 'open-uri'
-require 'hpricot'
+require 'nokogiri'
 require 'twitter'
 
 PATH_PREFIX = File.expand_path(File.dirname(__FILE__))
@@ -15,7 +15,7 @@ end
 URL = PATH_PREFIX + "/schedule.htm"
 MINUTE = 60
 
-doc = Hpricot(open(URL))
+doc = Nokogiri::HTML(open(URL))
 
 rows = doc.search("table tr")
 rows.shift
@@ -24,10 +24,10 @@ output = []
 
 rows.each do |row|
   cells = row.search("td")
-  timestring = (cells[0].html + " " + cells[1].html + " " + cells[2].html).gsub("&nbsp;", " ")
+  timestring = (cells[0].inner_html + " " + cells[1].inner_html + " " + cells[2].inner_html).gsub("&nbsp;", " ")
   time = Time.parse(timestring)
-  vessel = cells[3].html
-  direction_of_vessel = cells[4].html.downcase
+  vessel = cells[3].inner_html
+  direction_of_vessel = cells[4].inner_html.downcase
   output << {:vessel => vessel, :action => "opening", :time => (time - 5*MINUTE), :direction_of_vessel => direction_of_vessel}
   output << {:vessel => vessel, :action => "closing", :time => (time + 5*MINUTE), :direction_of_vessel => direction_of_vessel}
 end
