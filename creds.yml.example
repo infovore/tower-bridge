@@ -1,0 +1,6 @@
+config:
+  consumer_key: 1234
+  consumer_secret: 1234
+  access_token: 1234
+  access_token_secret: 1234
+  
