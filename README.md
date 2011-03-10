@@ -10,6 +10,6 @@ Configuration
 
 * Fill out your own creds.yml with the Twitter OAuth credentials you've acquired when you created an application on (developer.twitter.com)
 * Put all these files on a server.
-* Set up a cron task to download http://www.towerbridge.org.uk/TowerBridge/English/BridgeLifts/schedule.htm , once a day, to schedule.htm
+* Set up a cron task to download http://www.towerbridge.org.uk/TBE/EN/BridgeLiftTimes/ , once a day, to schedule.htm
 * Run tower-bridge.rb (or whatever your file is called) once a minute. It will make tweets.
 * That's it.
