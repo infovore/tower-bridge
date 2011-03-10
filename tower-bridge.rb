@@ -55,9 +55,12 @@ if next_event
   # for debug purposes:
   # puts output
   
-  oauth = Twitter::OAuth.new(CONSUMER_KEY, CONSUMER_SECRET)
-  oauth.authorize_from_access(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
-  
-  client = Twitter::Base.new(oauth)
-  client.update(output)
+  Twitter.configure do |config|
+    config.consumer_key = CONSUMER_KEY
+    config.consumer_secret = CONSUMER_SECRET
+    config.oauth_token = ACCESS_TOKEN
+    config.oauth_token_secret = ACCESS_TOKEN_SECRET
+  end
+
+  Twitter.update(output)
 end
