@@ -28,7 +28,7 @@ rows.each do |row|
   time = Time.parse(timestring)
   vessel = cells[3].inner_html
   direction_of_vessel = cells[4].inner_html.downcase
-  unless direction_of_vessel.match?("stream")
+  unless direction_of_vessel.match("stream")
     direction_of_vessel = direction_of_vessel + "stream"
   end
   output << {:vessel => vessel, :action => "opening", :time => (time - 5*MINUTE), :direction_of_vessel => direction_of_vessel}
