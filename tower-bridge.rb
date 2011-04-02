@@ -28,6 +28,9 @@ rows.each do |row|
   time = Time.parse(timestring)
   vessel = cells[3].inner_html
   direction_of_vessel = cells[4].inner_html.downcase
+  unless direction_of_vessel.match?("stream")
+    direction_of_vessel = direction_of_vessel + "stream"
+  end
   output << {:vessel => vessel, :action => "opening", :time => (time - 5*MINUTE), :direction_of_vessel => direction_of_vessel}
   output << {:vessel => vessel, :action => "closing", :time => (time + 5*MINUTE), :direction_of_vessel => direction_of_vessel}
 end
@@ -39,14 +42,14 @@ if next_event
   case next_event[:action]
   when "opening"
     output = "I am opening for the #{next_event[:vessel]}"
-    if next_event[:vessel].strip.downcase == "maintenance lift"
+    if ["maintenance lift", "Maint Lift"].include?(next_event[:vessel].strip.downcase)
       output << "."
     else
       output << ", which is passing #{next_event[:direction_of_vessel]}."
     end
   when "closing"
     output = "I am closing after the #{next_event[:vessel]}"
-    if next_event[:vessel].strip.downcase == "maintenance lift"
+    if ["maintenance lift", "Maint Lift"].include?(next_event[:vessel].strip.downcase)
       output << "."
     else
       output << " has passed #{next_event[:direction_of_vessel]}."
