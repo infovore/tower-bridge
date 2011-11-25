@@ -1,9 +1,8 @@
 #!/usr/bin/env ruby
 
-require 'rubygems'
-require 'open-uri'
-require 'nokogiri'
-require 'twitter'
+require "rubygems"
+require "bundler/setup"
+Bundler.require(:default)
 
 PATH_PREFIX = File.expand_path(File.dirname(__FILE__))
 config = YAML.parse(File.read(PATH_PREFIX + "/creds.yml"))
