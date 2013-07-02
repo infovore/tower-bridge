@@ -1,4 +1,4 @@
 source "http://rubygems.org"
 
-gem "nokogiri"
-gem "twitter", "1.6.2"
+gem 'nokogiri', '~> 1.5.10'
+gem "twitter"
